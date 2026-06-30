@@ -1,0 +1,531 @@
+@import url('https://fonts.googleapis.com/css2?family=Mystery+Quest&family=Nunito:wght@400;600;700&display=swap');
+ 
+:root {
+  --rosa: #F472B6;
+  --rosa-medio: #EC4899;
+  --rosa-claro: #FCE7F3;
+  --rosa-pastel: #FDF2F8;
+  --lilas: #C084FC;
+  --lilas-claro: #F3E8FF;
+  --branco: #FFFFFF;
+  --cinza: #F1F5F9;
+  --cinza-borda: #E2E8F0;
+  --texto: #4A1942;
+  --sombra: rgba(236, 72, 153, 0.18);
+}
+ 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+body {
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+}
+ 
+/* ===== TELA CAPA ===== */
+#tela-capa {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  outline: 4px dashed #000000;
+  outline-offset: -16px;
+}
+ 
+#tela-capa::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  top: -80px; left: -80px;
+}
+#tela-capa::after {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  bottom: -50px; right: -50px;
+}
+.boneca-flutuante {
+  position: absolute;
+  height: 42vh;
+  width: auto;
+  object-fit: contain;
+  animation: flutuar var(--dur, 4s) ease-in-out infinite;
+  filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.12));
+  z-index: 0;
+}
+ 
+.capa-conteudo {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 1;
+}
+ 
+#btn-jogar {
+  font-family: 'Mystery Quest', cursive;
+  font-size: 26px;
+  color: white;
+  background: #000000;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 52px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15), 0 10px 30px rgba(0,0,0,0.10);
+  letter-spacing: 1px;
+}
+#btn-jogar:hover {
+  animation: salto 0.5s ease infinite alternate;
+}
+ 
+.capa-boneca {
+  width: auto;
+  height: 65vh;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(4px 8px 16px rgba(0,0,0,0.18));
+}
+@keyframes flutuar {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+ 
+.estrela {
+  position: absolute;
+  font-size: 22px;
+  animation: girar 4s linear infinite;
+  opacity: 0.7;
+}
+@keyframes girar {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.3); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+ 
+/* ===== TELA JOGO ===== */
+#tela-jogo {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+}
+ 
+.jogo-header {
+  height: 60px;
+  background: white;
+  border-bottom: 2px solid var(--cinza-borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px var(--sombra);
+  position: relative;
+  z-index: 10;
+}
+.jogo-titulo {
+  font-family: 'Mystery Quest', cursive;
+  font-size: 35px;
+  color: #000000;
+  letter-spacing: 1px;
+}
+ 
+#btn-ver-album, #btn-resetar {
+  font-family: 'Mystery Quest', cursive;
+  font-size: 15px;
+  color: white;
+  background: #7e7e7e;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+  transition: transform 0.15s;
+}
+#btn-ver-album:hover, #btn-resetar:hover { transform: translateY(-2px); }
+ 
+#btn-camera {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.15s;
+  display: flex;
+  align-items: center;
+}
+#btn-camera:hover { transform: translateY(-2px); }
+ 
+.jogo-body {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+ 
+/* Barra lateral — MAIOR */
+.barra-categorias {
+  width: 140px;
+  background: #772d60;
+  border-right: 2px solid #a7588e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 8px;
+  box-shadow: 2px 0 8px rgba(91,155,240,0.25);
+  z-index: 5;
+  overflow-y: auto;
+}
+ 
+.cat-btn {
+  width: 116px; height: 116px;
+  border-radius: 16px;
+  border: 2.5px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.85);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.cat-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+}
+.cat-btn:hover { border-color: white; background: rgba(255,255,255,0.35); transform: scale(1.05); }
+.cat-btn.ativa { border-color: white; background: rgba(255,255,255,0.5); box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+.cat-btn .cat-label {
+  position: absolute;
+  bottom: -18px;
+  font-size: 9px;
+  color: white;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.cat-btn:hover .cat-label { opacity: 1; }
+ 
+/* Área central */
+.area-central {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+ 
+.boneca-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+ 
+/* BONECA MAIOR */
+.boneca-wrapper {
+  position: relative;
+  width: 460px;
+  height: calc(100vh - 60px - 145px);
+}
+.boneca-wrapper img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#layer-paredes {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 0;
+}
+#corpo              { z-index: 1; }
+#layer-meias        { z-index: 2; }
+#layer-sapatos      { z-index: 3; }
+#layer-calcas       { z-index: 4; }
+#layer-blusas-baixo { z-index: 3; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+#layer-blusas       { z-index: 6; }
+#layer-vestidos     { z-index: 7; }
+#layer-acessorios   { z-index: 8; }
+#layer-casacos      { z-index: 9; }
+ 
+#btn-salvar-look {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Mystery Quest', cursive;
+  font-size: 19px;
+  background: #000000;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 11px 34px;
+  cursor: pointer;
+  z-index: 21;
+  display: none;
+  box-shadow: 0 4px 12px var(--sombra);
+  transition: transform 0.15s;
+  pointer-events: all;
+}
+#btn-salvar-look:hover { transform: translateX(-50%) scale(1.05); }
+ 
+/* Flash */
+#flash {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.1s;
+}
+ 
+/* Barra inferior — MAIOR */
+.barra-opcoes {
+  width: 100%;
+  min-height: 145px;
+  max-height: 145px;
+  background: #573263;
+  border-top: 2px solid #956fa2;
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 16px 0;
+  gap: 12px;
+  box-shadow: 0 -2px 8px rgba(236,72,153,0.15);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.5) transparent;
+  flex-shrink: 0;
+}
+.barra-opcoes::-webkit-scrollbar { height: 4px; }
+.barra-opcoes::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.5); border-radius: 4px; }
+ 
+.barra-vazia {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 600;
+}
+ 
+.opcao-item {
+  flex: 0 0 112px;
+  height: 112px;
+  border-radius: 16px;
+  border: 2.5px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.85);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.opcao-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.opcao-item:hover { border-color: white; background: rgba(255,255,255,0.35); transform: translateY(-3px); box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+.opcao-item.selecionada { border-color: white; background: rgba(255,255,255,0.5); box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+ 
+.btn-remover {
+  flex: 0 0 112px;
+  height: 112px;
+  border-radius: 16px;
+  border: 2.5px dashed rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  color: white;
+  font-weight: 700;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.btn-remover:not(:disabled):hover { border-color: white; background: rgba(255,255,255,0.5); }
+.btn-remover:disabled { opacity: 0.4; cursor: default; }
+.btn-remover .icone-x { font-size: 22px; line-height: 1; }
+ 
+/* ===== TELA ÁLBUM ===== */
+#tela-album {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #FCE7F3 0%, #F3E8FF 100%);
+  flex-direction: column;
+  overflow: hidden;
+}
+ 
+.album-header {
+  height: 60px;
+  background: white;
+  border-bottom: 2px solid var(--cinza-borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px var(--sombra);
+  flex-shrink: 0;
+}
+.album-titulo {
+  font-family: 'Mystery Quest', cursive;
+  font-size: 35px;
+  color: #000000;
+}
+.album-contador {
+  font-size: 13px;
+  color: #999;
+  font-weight: 600;
+}
+ 
+.album-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-content: flex-start;
+  justify-content: center;
+}
+ 
+.polaroid {
+  background: white;
+  padding: 20px 20px 64px;
+  box-shadow: 2px 4px 16px rgba(0,0,0,0.13);
+  border-radius: 3px;
+  width: 260px;
+  position: relative;
+  transform: rotate(var(--rot));
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.polaroid:hover { transform: rotate(0deg) scale(1.04); box-shadow: 4px 8px 24px rgba(0,0,0,0.18); }
+.polaroid-img-wrap {
+  width: 220px;
+  height: 260px;
+  background: var(--rosa-pastel);
+  border: 1px solid #eee;
+  overflow: hidden;
+  position: relative;
+}
+.polaroid-img-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.polaroid-label {
+  position: absolute;
+  bottom: 8px;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: 'Mystery Quest', cursive;
+  font-size: 13px;
+  color: #bbb;
+}
+.polaroid-del {
+  position: absolute;
+  top: -8px; right: -8px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: #f87171;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  opacity: 0;
+  transition: transform 0.15s;
+}
+.polaroid:hover .polaroid-del { opacity: 1; }
+.polaroid-del:hover { transform: scale(1.15); }
+ 
+.album-vazio {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.album-vazio span:first-child { font-size: 48px; }
+ 
+.album-footer {
+  height: 64px;
+  background: white;
+  border-top: 2px solid var(--cinza-borda);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+ 
+#btn-voltar-capa, #btn-voltar-jogo {
+  font-family: 'Mystery Quest', cursive;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 32px;
+  cursor: pointer;
+  transition: transform 0.15s;
+  margin: 0 8px;
+}
+#btn-voltar-capa, #btn-voltar-jogo {
+  background: #83225e;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+}
+#btn-voltar-capa:hover, #btn-voltar-jogo:hover { transform: translateY(-2px); }
+ 
+#notif {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--texto);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+#notif.visivel { transform: translateX(-50%) translateY(0); }
+ 
