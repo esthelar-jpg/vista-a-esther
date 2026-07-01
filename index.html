@@ -14,19 +14,19 @@
 
   <div id="tela-capa">
     <span class="estrela" style="top:8%;left:8%;animation-duration:3s">✦</span>
-<span class="estrela" style="top:12%;right:12%;animation-duration:5s;font-size:16px">✧</span>
-<span class="estrela" style="bottom:6%;left:15%;animation-duration:4s;font-size:14px">✦</span>
-<span class="estrela" style="bottom:10%;right:8%;animation-duration:6s">✧</span>
-<span class="estrela" style="top:40%;left:4%;animation-duration:3.5s;font-size:12px">✦</span>
-<span class="estrela" style="top:20%;left:35%;animation-duration:4.5s;font-size:13px">✧</span>
-<span class="estrela" style="top:60%;right:30%;animation-duration:5.5s;font-size:15px">✦</span>
-<span class="estrela" style="bottom:5%;left:15%;animation-duration:3.8s;font-size:11px">✧</span>
-<span class="estrela" style="top:75%;left:8%;animation-duration:4.2s;font-size:16px">✦</span>
-<span class="estrela" style="top:5%;right:35%;animation-duration:5s;font-size:12px">✧</span>
-<span class="estrela" style="bottom:55%;right:5%;animation-duration:3.5s;font-size:14px">✦</span>
-<span class="estrela" style="bottom:6%;left:15%;animation-duration:4s;font-size:14px">✦</span>
-<span class="estrela" style="bottom:20%;left:62%;animation-duration:4.8s;font-size:12px">✦</span>
-<span class="estrela" style="bottom:3%;left:50%;animation-duration:3.6s;font-size:15px">✧</span>
+    <span class="estrela" style="top:12%;right:12%;animation-duration:5s;font-size:16px">✧</span>
+    <span class="estrela" style="bottom:6%;left:15%;animation-duration:4s;font-size:14px">✦</span>
+    <span class="estrela" style="bottom:10%;right:8%;animation-duration:6s">✧</span>
+    <span class="estrela" style="top:40%;left:4%;animation-duration:3.5s;font-size:12px">✦</span>
+    <span class="estrela" style="top:20%;left:35%;animation-duration:4.5s;font-size:13px">✧</span>
+    <span class="estrela" style="top:60%;right:30%;animation-duration:5.5s;font-size:15px">✦</span>
+    <span class="estrela" style="bottom:5%;left:15%;animation-duration:3.8s;font-size:11px">✧</span>
+    <span class="estrela" style="top:75%;left:8%;animation-duration:4.2s;font-size:16px">✦</span>
+    <span class="estrela" style="top:5%;right:35%;animation-duration:5s;font-size:12px">✧</span>
+    <span class="estrela" style="bottom:55%;right:5%;animation-duration:3.5s;font-size:14px">✦</span>
+    <span class="estrela" style="bottom:6%;left:38%;animation-duration:4s;font-size:13px">✧</span>
+    <span class="estrela" style="bottom:20%;left:62%;animation-duration:4.8s;font-size:12px">✦</span>
+    <span class="estrela" style="bottom:3%;left:50%;animation-duration:3.6s;font-size:15px">✧</span>
     <div class="capa-conteudo">
       <button id="btn-jogar" onclick="irParaJogo()">Jogar</button>
       <div style="position:relative;display:inline-block;">
@@ -41,12 +41,12 @@
     <div class="jogo-header">
       <div class="jogo-titulo">Vista a Esther!</div>
       <div style="display:flex;align-items:center;gap:10px;">
-  <button id="btn-resetar" onclick="resetarLook()">Limpar</button>
-  <button id="btn-ver-album" onclick="irParaAlbum()">Album</button>
-  <button id="btn-camera" onclick="tirarFoto()">
-  <img src="imagens/outros/camera.png" style="width:60px;height:64px;object-fit:contain;">
-</button>
-</div>
+        <button id="btn-resetar" onclick="resetarLook()">Limpar</button>
+        <button id="btn-ver-album" onclick="irParaAlbum()">Album</button>
+        <button id="btn-camera" onclick="tirarFoto()">
+          <img src="imagens/outros/camera.png" style="width:60px;height:64px;object-fit:contain;">
+        </button>
+      </div>
     </div>
     <div class="jogo-body">
       <div class="barra-categorias">
@@ -85,21 +85,22 @@
       </div>
       <div class="area-central">
         <div class="boneca-container">
-  <img id="layer-paredes" src="" alt="" style="display:none;">
-  <div class="boneca-wrapper" id="boneca-wrapper">
-    <div id="moldura-camera"></div>
-    <button id="btn-salvar-look" onclick="salvarLook()">Salvar look</button>
-    <img id="corpo" src="imagens/outros/corpo.png" alt="Boneca">
-<img id="layer-meias"         src="" alt="" style="display:none;">
-<img id="layer-sapatos"       src="" alt="" style="display:none;">
-<img id="layer-calcas"        src="" alt="" style="display:none;">
-<img id="layer-blusas-baixo"  src="" alt="" style="display:none;">
-<img id="layer-blusas"        src="" alt="" style="display:none;">
-<img id="layer-vestidos"      src="" alt="" style="display:none;">
-<img id="layer-acessorios"    src="" alt="" style="display:none;">
-<img id="layer-casacos"       src="" alt="" style="display:none;">
-  </div>
-</div>
+          <img id="layer-paredes" src="" alt="" style="display:none;">
+          <div class="boneca-wrapper" id="boneca-wrapper">
+            <div id="moldura-camera"></div>
+            <button id="btn-salvar-look" onclick="salvarLook()">Salvar look</button>
+            <img id="corpo" src="imagens/outros/corpo.png" alt="Boneca">
+            <img id="layer-meias"            src="" alt="" style="display:none;">
+            <img id="layer-sapatos"          src="" alt="" style="display:none;">
+            <img id="layer-calcas"           src="" alt="" style="display:none;">
+            <img id="layer-blusas-baixo"     src="" alt="" style="display:none;">
+            <img id="layer-acessorios-baixo" src="" alt="" style="display:none;">
+            <img id="layer-blusas"           src="" alt="" style="display:none;">
+            <img id="layer-vestidos"         src="" alt="" style="display:none;">
+            <img id="layer-acessorios"       src="" alt="" style="display:none;">
+            <img id="layer-casacos"          src="" alt="" style="display:none;">
+          </div>
+        </div>
         <div class="barra-opcoes" id="barra-opcoes">
           <div class="barra-vazia">Escolha uma categoria</div>
         </div>
