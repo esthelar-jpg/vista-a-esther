@@ -266,8 +266,9 @@ body {
 #layer-meias        { z-index: 2; }
 #layer-sapatos      { z-index: 3; }
 #layer-calcas       { z-index: 4; }
-#layer-blusas-baixo { z-index: 3; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
-#layer-blusas       { z-index: 6; }
+#layer-blusas-baixo     { z-index: 3; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+#layer-acessorios-baixo { z-index: 3; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+#layer-blusas           { z-index: 6; }
 #layer-vestidos     { z-index: 7; }
 #layer-acessorios   { z-index: 8; }
 #layer-casacos      { z-index: 9; }

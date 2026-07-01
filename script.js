@@ -9,7 +9,8 @@ const CATEGORIAS = {
   acessorios: { layer: 'layer-acessorios', pasta: 'imagens/acessorios', itens: ['boina','boinacomaba','brincoperolas','brincoprata','colarcoracao','colarlongo','colarperolas','elastico','presilhas','pulseiraperolas','relogio'] }
 };
 
-const PECAS_LAYER_BAIXO = ['blusagola', 'elastico', 'pulseiraperolas', 'relogio'];
+const PECAS_LAYER_BAIXO = ['blusagola'];
+const ACESSORIOS_LAYER_BAIXO = ['elastico', 'pulseiraperolas', 'relogio'];
 
 const estado = { paredes:null, meias:null, sapatos:null, blusas:null, calcas:null, vestidos:null, casacos:null, acessorios:null };
 let categoriaAtiva = null;
@@ -71,12 +72,29 @@ function vestirPeca(cat, item, el) {
   estado[cat] = item;
 
   const usarLayerBaixo = PECAS_LAYER_BAIXO.includes(item);
-  const layerId = usarLayerBaixo ? 'layer-blusas-baixo' : CATEGORIAS[cat].layer;
+  const usarAcessoriosBaixo = ACESSORIOS_LAYER_BAIXO.includes(item);
 
-  if (cat === 'blusas' || cat === 'acessorios') {
+  let layerId;
+  if (usarLayerBaixo) layerId = 'layer-blusas-baixo';
+  else if (usarAcessoriosBaixo) layerId = 'layer-acessorios-baixo';
+  else layerId = CATEGORIAS[cat].layer;
+
+  if (cat === 'blusas') {
     const layerAlternativo = document.getElementById(usarLayerBaixo ? CATEGORIAS[cat].layer : 'layer-blusas-baixo');
     layerAlternativo.src = '';
     layerAlternativo.style.display = 'none';
+  }
+
+  if (cat === 'acessorios' && usarAcessoriosBaixo) {
+    const layerNormal = document.getElementById(CATEGORIAS[cat].layer);
+    layerNormal.src = '';
+    layerNormal.style.display = 'none';
+  }
+
+  if (cat === 'acessorios' && !usarAcessoriosBaixo && !usarLayerBaixo) {
+    const layerAcBaixo = document.getElementById('layer-acessorios-baixo');
+    layerAcBaixo.src = '';
+    layerAcBaixo.style.display = 'none';
   }
 
   const layer = document.getElementById(layerId);
@@ -95,6 +113,17 @@ function removerPeca(cat) {
   const layer = document.getElementById(CATEGORIAS[cat].layer);
   layer.src = '';
   layer.style.display = 'none';
+
+  if (cat === 'blusas') {
+    const layerBaixo = document.getElementById('layer-blusas-baixo');
+    layerBaixo.src = ''; layerBaixo.style.display = 'none';
+  }
+
+  if (cat === 'acessorios') {
+    const layerAcBaixo = document.getElementById('layer-acessorios-baixo');
+    layerAcBaixo.src = ''; layerAcBaixo.style.display = 'none';
+  }
+
   renderizarOpcoes(cat);
 }
 
@@ -127,6 +156,8 @@ function resetarLook() {
   });
   const layerBaixo = document.getElementById('layer-blusas-baixo');
   if (layerBaixo) { layerBaixo.src = ''; layerBaixo.style.display = 'none'; }
+  const layerAcBaixo = document.getElementById('layer-acessorios-baixo');
+  if (layerAcBaixo) { layerAcBaixo.src = ''; layerAcBaixo.style.display = 'none'; }
   categoriaAtiva = null;
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('ativa'));
   document.getElementById('barra-opcoes').innerHTML = '<div class="barra-vazia">Escolha uma categoria</div>';
@@ -165,12 +196,12 @@ function renderizarAlbum() {
       .sort((a,b) => ordem.indexOf(a[0]) - ordem.indexOf(b[0]));
 
     const parede = look.pecas['paredes'];
-const semParede = layers.filter(([cat]) => cat !== 'paredes');
+    const semParede = layers.filter(([cat]) => cat !== 'paredes');
 
-const imgsHtml = `
-  ${parede ? `<img src="${CATEGORIAS['paredes'].pasta}/${parede}.png" alt="" style="object-fit:cover;width:100%;height:100%;">` : ''}
-  <img src="imagens/outros/corpo.png" alt="corpo">
-  ${semParede.map(([cat,val]) => `<img src="${CATEGORIAS[cat].pasta}/${val}.png" alt="">`).join('')}`;
+    const imgsHtml = `
+      ${parede ? `<img src="${CATEGORIAS['paredes'].pasta}/${parede}.png" alt="" style="object-fit:cover;width:100%;height:100%;">` : ''}
+      <img src="imagens/outros/corpo.png" alt="corpo">
+      ${semParede.map(([cat,val]) => `<img src="${CATEGORIAS[cat].pasta}/${val}.png" alt="">`).join('')}`;
 
     return `
       <div class="polaroid" style="--rot:${rots[i % rots.length]}deg">
